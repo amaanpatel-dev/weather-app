@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const humidityDisplay = document.querySelector(".humidity");
   const windDisplay = document.querySelector(".wind");
   const feelslikeDisplay = document.querySelector(".feels-like");
+  const weatherIconDisplay = document.querySelector(".weather-icon");
 
   submitBtn.addEventListener("click", async (e) => {
       const city = cityInput.value.trim();
@@ -35,12 +36,26 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayWeatherData(data) {
     console.log(data);
 
-    const { name, main, wind } = data 
+    const { name, main, wind, weather } = data 
     cityDisplay.textContent = name
     temperatureDisplay.textContent = `${Math.round(main.temp)}°C`
     feelslikeDisplay.textContent = `Feels like ${Math.round(main.feels_like)}°C`
     humidityDisplay.textContent = `${main.humidity}%`
     windDisplay.textContent = `${wind.speed} km/h`
+
+    if(weather[0].main == "Rain"){
+        weatherIconDisplay.src ="./images/rain.png"
+    }else if(weather[0].main == "Clouds"){
+        weatherIconDisplay.src ="./images/clouds.png"
+    }else if(weather[0].main == "Drizzle"){
+        weatherIconDisplay.src = "./images/drizzle.png"
+    }else if(weather[0].main == "Clear"){
+        weatherIconDisplay.src ="./images/clear.png"
+    }else if(weather[0].main == "Mist"){
+        weatherIconDisplay.src ="./images/mist.png"
+    }else if(weather[0].main == "Snow"){
+        weatherIconDisplay.src ="./images/snow.png"
+    }
 
   }
 
